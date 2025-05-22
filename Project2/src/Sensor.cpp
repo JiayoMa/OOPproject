@@ -1,6 +1,6 @@
 #include "../include/Sensor.h"
 #include <iostream> 
-
+#include <sstream> 
 Sensor::Sensor(int id, const std::string& name, DeviceImportance importance, double powerConsumption,
     double temp, double hum, double co2)
     : Device(id, name, importance, powerConsumption), temperature(temp), humidity(hum), co2Concentration(co2) {
@@ -49,4 +49,13 @@ std::istream& operator>>(std::istream& is, Sensor& sensor) {
     std::cout << "请输入CO2浓度 (例如, 0.06 代表 6%): ";
     is >> sensor.co2Concentration;
     return is;
+}
+std::string Sensor::toFileString() const {
+    std::stringstream ss;
+    ss << "Sensor," // 类型
+        << Device::toFileString() // 调用基类获取通用部分: id,name,importance,powerConsumption
+        << "," << getTemperature()
+        << "," << getHumidity()
+        << "," << getCO2Concentration();
+    return ss.str();
 }

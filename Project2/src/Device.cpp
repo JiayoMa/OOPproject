@@ -1,10 +1,23 @@
 #include "../include/Device.h"
-#include <iostream> // Make sure iostream is included if not already
-
+#include <iostream> // Make sure iostream is included if not alreadypowerConsumption
+#include <sstream> //
 Device::Device(int id, const std::string& name, DeviceImportance importance, double powerConsumption)
     : id(id), name(name), importance(importance), powerConsumption(powerConsumption), emergencyPowerOff(false) {
 }
-
+// 这就是 importanceToString 辅助函数
+std::string importanceToString(DeviceImportance imp) { // 用于保存文件
+    return std::to_string(static_cast<int>(imp)); // 将枚举值转换为其底层的整数，再转换为字符串
+}
+std::string Device::toFileString() const {
+    std::stringstream ss;
+    // 注意：类型字符串 (Sensor, Light, AC) 需要在子类中添加，或者在 saveDevicesToFile 中通过 dynamic_cast 判断
+    // 这里只处理通用部分，不包含类型字符串和前导逗号
+    ss << getId() << ","
+        << getName() << ","
+        << importanceToString(getImportance()) << "," // 需要 importanceToString 辅助函数
+        << getPowerConsumption(); // 假设功耗可以直接输出
+    return ss.str();
+}
 Device::~Device() {
     // std::cout << "设备 " << name << " (ID: " << id << ") 已销毁。" << std::endl;
 }
@@ -51,3 +64,17 @@ std::istream& operator>>(std::istream& is, Device& device) {
     // 重要程度通常通过菜单或特定逻辑设置，此处简化
     return is;
 }
+DeviceImportance stringToImportance(const std::string& s) {
+    try {
+        int val = std::stoi(s);
+        if (val >= static_cast<int>(DeviceImportance::LOW) && val <= static_cast<int>(DeviceImportance::CRITICAL)) {
+            return static_cast<DeviceImportance>(val);
+        }
+        std::cerr << "警告: 重要性值 '" << s << "' 超出预期范围。默认为 中。" << std::endl;
+    }
+    catch (const std::exception& e) {
+        std::cerr << "警告: 重要性值 '" << s << "' 无效。默认为 中。错误: " << e.what() << std::endl;
+    }
+    return DeviceImportance::MEDIUM;
+}
+

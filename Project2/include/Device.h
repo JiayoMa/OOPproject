@@ -23,7 +23,7 @@ enum class DeviceImportance {
     HIGH,
     CRITICAL
 };
-
+std::string importanceToString(DeviceImportance imp);
 class Device {
 protected:
     int id;
@@ -38,7 +38,7 @@ public:
 
     // Virtual destructor
     virtual ~Device();
-
+    virtual std::string toFileString() const; // 基类实现通用部分
     // Pure virtual function for status update (to be implemented by derived classes)
     virtual void updateStatus() = 0;
 
@@ -65,5 +65,5 @@ public:
     // Friend function for overloading input operator (basic example)
     friend std::istream& operator>>(std::istream& is, Device& device);
 };
-
+DeviceImportance stringToImportance(const std::string& s);
 #endif // DEVICE_H

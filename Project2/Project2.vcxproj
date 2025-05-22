@@ -138,6 +138,7 @@
     <ClInclude Include="include\DeviceFactory.h" />
     <ClInclude Include="include\Light.h" />
     <ClInclude Include="include\Sensor.h" />
+    <ClInclude Include="include\UserManager.h" />
     <ClInclude Include="SmartLogger.h" />
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +149,7 @@
     <ClCompile Include="src\DeviceFactory.cpp" />
     <ClCompile Include="src\Light.cpp" />
     <ClCompile Include="src\Sensor.cpp" />
+    <ClCompile Include="src\UserManager.cpp" />
     <ClCompile Include="User.cpp" />
     <ClCompile Include="User.h" />
   </ItemGroup>

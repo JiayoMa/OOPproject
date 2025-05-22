@@ -15,7 +15,7 @@ public:
            double temp = 20.0, double hum = 50.0, double co2 = 0.04); // 0.04% is typical atmospheric CO2
 
     ~Sensor() override;
-
+    std::string toFileString() const override;
     void updateStatus() override;
     void displayInfo() const override;
 
