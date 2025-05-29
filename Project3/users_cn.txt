@@ -1,0 +1,4 @@
+admin:admin:ADMIN
+andyma:123:USER
+an:123:USER
+123:123:USER

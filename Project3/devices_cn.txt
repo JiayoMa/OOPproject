@@ -1,0 +1,5 @@
+# TYPE,ID,Name,Importance(0-3),PowerConsumption,emergencyPowerOff(0/1),[specific_params...]
+# SENSOR,ID,Name,Imp,PC,EPO,temperature,humidity,co2Concentration
+# LIGHT,ID,Name,Imp,PC,EPO,isOn(0/1),brightness
+# AC,ID,Name,Imp,PC,EPO,mode(0-3),targetTemperature,fanSpeed(0-3)
+SENSOR,23,123,1,2,0,3,1,3
